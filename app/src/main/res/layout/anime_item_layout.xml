@@ -27,7 +27,7 @@
             <TextView
                 android:id="@+id/name"
                 android:background="#90000000"
-                android:textSize="18sp"
+                android:textSize="13sp"
                 tools:text = "Naruto"
                 android:padding="8dp"
                 android:textColor="@color/white"

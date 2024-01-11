@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchInputLayout"
@@ -21,7 +21,9 @@
             android:id="@+id/searchInputEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Anime name">
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:hint="Ex: Hunter X hunter">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -42,7 +44,7 @@
         android:layout_marginTop="8dp"
         tools:itemCount="7"
         app:spanCount="3"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
         tools:listitem="@layout/anime_item_layout"
         app:layout_constraintTop_toBottomOf="@id/searchInputLayout"
         app:layout_constraintBottom_toBottomOf="parent"

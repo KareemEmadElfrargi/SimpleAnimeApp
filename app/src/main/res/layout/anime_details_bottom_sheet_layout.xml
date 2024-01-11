@@ -79,7 +79,7 @@
 
     <TextView
         android:id="@+id/synopsis"
-        android:textSize="16sp"
+        android:textSize="8sp"
         android:padding="8dp"
         tools:text="Moments prior to Naruto Uzumaki\'s birth, a huge demon known as the Kyuubi, the Nine-Tailed Fox, attacked Konohagakure, the Hidden Leaf Village, and wreaked havoc. In order to put an end to the Kyuubi'..."
         android:textColor="@color/black"
