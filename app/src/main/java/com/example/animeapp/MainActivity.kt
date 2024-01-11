@@ -26,26 +26,32 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             val animeService = AnimeService.create()
             val callTop = animeService.getTopAnime()
-            callTop.enqueue(object : Callback<TopAnime>{
+            callTop.enqueue(object : Callback<TopAnime> {
                 override fun onResponse(call: Call<TopAnime>, response: Response<TopAnime>) {
-                    if (response.body() != null){
-                        val top = response.body()!!.top
-                        animeRecyclerView.adapter = AnimeAdapter(this@MainActivity,top)
+                    if (response.isSuccessful && response.body() != null) {
+                        val top = response.body()!!.data
+                        if (top != null) {
+                            animeRecyclerView.adapter = AnimeAdapter(this@MainActivity, top)
+                        } else {
+                            Toast.makeText(this@MainActivity, "Top Anime list is null", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(this@MainActivity, "Failed to fetch top anime", Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<TopAnime>, t: Throwable) {
                     Toast.makeText(this@MainActivity, t.message.toString(), Toast.LENGTH_SHORT).show()
                 }
-
             })
+
         }
     }
 }
 
 class AnimeAdapter(
     private val parentActivity :AppCompatActivity,
-    private val animes : List<Result>
+    private val animes : List<Data>
 ) : RecyclerView.Adapter<AnimeAdapter.CustomViewHolder>(){
     inner class CustomViewHolder(view: View) : ViewHolder(view)
 
@@ -62,8 +68,8 @@ class AnimeAdapter(
         val image = view.findViewById<ImageView>(R.id.image)
 
         name.text = anime.title
-
-        Picasso.get().load(anime.imageUrl).into(image)
+        val imageUrl = anime.images?.jpg?.imageUrl.toString()
+        Picasso.get().load(imageUrl).into(image)
     }
     override fun getItemCount(): Int  = animes.size
 }
